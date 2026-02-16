@@ -398,16 +398,14 @@ const Dashboard = () => {
       </div>
 
       <Modal
-        isOpen={openCreateModal}
-        onClose={() => {
-          setOpenCreateModal(false);
-        }}
-        hideHeader
-      >
-        <div>
-          <CreateResumeForm />
-        </div>
-      </Modal>
+  isOpen={openCreateModal}
+  onClose={() => setOpenCreateModal(false)}
+  hideHeader
+>
+  <CreateResumeForm onClose={() => setOpenCreateModal(false)} />
+</Modal>
+
+
 
       {/* Animation keyframes */}
       <style>

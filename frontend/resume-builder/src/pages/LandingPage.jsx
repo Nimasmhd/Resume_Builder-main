@@ -626,7 +626,7 @@ const LandingPage = () => {
                   {["twitter", "linkedin", "facebook", "instagram"].map((social) => (
                     <a
                       key={social}
-                      href="#"
+                      href=""
                       className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 transition-all duration-300"
                     >
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -690,20 +690,35 @@ const LandingPage = () => {
       </div>
 
       <Modal
-        isOpen={openAuthModal}
+  isOpen={openAuthModal}
+  onClose={() => {
+    setOpenAuthModal(false);
+    setCurrentPage("login");
+  }}
+  hideHeader
+>
+  <div>
+    {currentPage === "login" && (
+      <Login
+        setCurrentPage={setCurrentPage}
+        onClose={() => {
+          setOpenAuthModal(false); // close modal
+          navigate("/");           // navigate to landing page
+        }}
+      />
+    )}
+    {currentPage === "signup" && (
+      <SignUp
+        setCurrentPage={setCurrentPage}
         onClose={() => {
           setOpenAuthModal(false);
-          setCurrentPage("login");
+          navigate("/");
         }}
-        hideHeader
-      >
-        <div>
-          {currentPage === "login" && <Login setCurrentPage={setCurrentPage} />}
-          {currentPage === "signup" && (
-            <SignUp setCurrentPage={setCurrentPage} />
-          )}
-        </div>
-      </Modal>
+      />
+    )}
+  </div>
+</Modal>
+
 
       {/* Global Keyframe Styles - Add this to your index.css or App.css */}
       <style>
